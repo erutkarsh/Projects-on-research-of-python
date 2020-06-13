@@ -1,0 +1,57 @@
+import networkx as nx
+G=nx.Graph()
+G.add_nodes_from([1,2,3,4])
+G.add_edges_from([(1,2),(3,4)])
+G.nodes(),G.edges()
+import matplotlib.pyplot as plt
+G=nx.karate_club_graph()
+nx.draw(G,labels=True,node_color="lightblue",edge_color="gray")
+plt.savefig("karate_graph.pdf")
+#start of algo
+def er_graph(N,p):
+    G=nx.Graph()
+    G.add_nodes_from(range(N))
+    for node1 in G.nodes:
+        for node2 in G.nodes:
+            if node1>node2 and bernoulli.rvs(p=p):
+                G.add_edge(node1,node2)
+    return G
+nx.draw(er_graph(10,0),node_size=40,node_color="red",edge_color="black")
+plt.savefig("random_graphs.pdf")
+def plot_degree_distribution(k):
+    degree_sequence = [d for n, d in G.degree()]
+    plt.hist(degree_sequence,histtype="step")
+    plt.xlabel("Degree $k$")
+    plt.ylabel("$p(k)$")
+    plt.title("Degree distribution")
+G1=er_graph(500,0.08)
+plot_degree_distribution(G1)
+G2=er_graph(500,0.08)
+plot_degree_distribution(G2)
+G3=er_graph(500,0.08)
+plot_degree_distribution(G3)
+nx.draw(er_graph(100, 0.03),node_size=40,node_color="red",edge_color="black")
+import numpy as np
+A1=np.loadtxt("adj_allVillageRelationships_vilno_1.csv",delimiter=",")
+A2=np.loadtxt("adj_allVillageRelationships_vilno_2.csv",delimiter=",")
+
+G1=nx.to_networkx_graph(A1)
+G2=nx.to_networkx_graph(A2)
+
+def basic_net_stats(G):
+    print("Number of nodes:%d"%G.number_of_nodes())
+    print("Number of edges:%d"%G.number_of_edges())
+    degree_sequence = [d for n, d in G.degree()]
+    print("Average degree:%2f"%np.mean(degree_sequence))
+    
+plot_degree_distribution(G1)
+plot_degree_distribution(G2)
+plt.savefig("Village_hist.pdf")
+
+def connected_component_subgraphs(G)
+    for c in nx.connected_components(G)
+        yield G.subgraph(c)
+        
+gen=nx.connected_component_subgraphs(G1)
+G1_LCC=max(nx.connected_component_subgraphs(G1),key=len)
+G2_LCC=max(nx.connected_component_subgraphs(G2),key=len)
